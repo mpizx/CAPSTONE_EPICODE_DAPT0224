@@ -57,7 +57,7 @@ Il progetto include una **dashboard interattiva in Power BI**, che consente di v
 
 ## Credits
 
-- **Michele**: Sviluppo del progetto e analisi dei dati.
+- **Michele Pinzan**: Sviluppo del progetto e analisi dei dati.
 - **NSL-KDD Dataset**: Dati utilizzati per l'analisi del traffico di rete. Dataset scaricabile da [Kaggle](https://www.kaggle.com/datasets/hassan06/nslkdd).
   
 ## License
