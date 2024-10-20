@@ -1,54 +1,65 @@
-# Rilevazione di Anomalie nel Traffico di Rete - NSL-KDD Dataset
+# Progetto di Rilevazione di Anomalie nel Traffico di Rete - NSL-KDD Dataset
 
 ## Descrizione del Progetto
 
-Questo progetto si concentra sull'analisi del **traffico di rete** per identificare **anomalie** che potrebbero indicare minacce informatiche, come attacchi DDoS, brute force o tentativi di accesso non autorizzati. Utilizzando il **dataset NSL-KDD**, il progetto esamina il traffico di rete in base a variabili chiave, come i byte inviati e ricevuti, i tentativi di login falliti, i protocolli utilizzati, e calcola un punteggio di rischio per ciascun evento.
+Questo progetto si concentra sull'analisi del **traffico di rete** per identificare anomalie che potrebbero indicare minacce informatiche, come attacchi DDoS, brute force o tentativi di accesso non autorizzati. Utilizzando il **dataset NSL-KDD**, che contiene sia traffico legittimo che attività sospette, abbiamo condotto un'analisi per rilevare comportamenti anomali e potenzialmente dannosi, offrendo insights che possono aiutare a prevenire attacchi.
 
-Inoltre, sono stati aggiunti **timestamp simulati** per creare un'analisi temporale che permette di osservare l'andamento del traffico e le anomalie nel tempo. I risultati sono stati visualizzati tramite **grafici avanzati** in Python e integrati in una **dashboard interattiva con Power BI**.
+Il progetto si conclude con la creazione di una **dashboard interattiva in Power BI** che presenta i risultati dell'analisi in modo chiaro e intuitivo.
 
-## Funzionalità Principali
+## Perché abbiamo scelto questo progetto
 
-- **Analisi dei log di rete**: Analizza i dati per rilevare comportamenti anomali.
-- **Calcolo del punteggio di rischio**: Basato su variabili come byte inviati e tentativi falliti.
-- **Rilevamento delle anomalie**: Tramite soglie predefinite e deviazione standard.
-- **Simulazione temporale**: Aggiunta di una colonna `timestamp` per visualizzare le anomalie nel tempo.
-- **Dashboard Power BI**: Una dashboard interattiva per monitorare i risultati in tempo reale.
+L'idea centrale dietro questo progetto è legata all'importanza crescente della **cybersecurity** in un mondo digitale sempre più connesso. Le reti aziendali sono frequentemente bersaglio di attacchi informatici, che possono compromettere dati sensibili e causare danni significativi. **Monitorare e analizzare il traffico di rete** in tempo reale è essenziale per rilevare e mitigare potenziali minacce.
+
+### Perché un'analisi statistica invece del machine learning?
+
+Abbiamo scelto di adottare un'**analisi statistica** piuttosto che strumenti di machine learning per diverse ragioni:
+1. **Semplicità e chiarezza**: L'analisi statistica consente di identificare anomalie in modo chiaro, utilizzando metodi come la deviazione standard e i punteggi di rischio. Ciò permette di comprendere facilmente i dati senza la complessità degli algoritmi di machine learning.
+2. **Interpretabilità**: I risultati statistici sono immediatamente comprensibili e interpretabili dagli operatori di rete. In molti casi, le aziende preferiscono strumenti che forniscono risposte semplici e dirette, piuttosto che modelli predittivi complessi che possono essere difficili da spiegare.
+3. **Focalizzazione su pattern anomali**: L'obiettivo era concentrarsi su anomalie evidenti e comportamenti fuori dalla norma. Le soglie e le regole statistiche (come il calcolo della media e la deviazione standard) sono sufficienti per rilevare picchi di traffico o attività sospette in molti scenari.
+   
+L'analisi statistica offre quindi un approccio diretto ed efficace per il rilevamento di anomalie, senza la necessità di creare modelli complessi di apprendimento automatico, che richiedono tempo di addestramento e test.
 
 ## Dataset Utilizzato
 
-Il dataset utilizzato è **NSL-KDD**, una versione migliorata del classico dataset KDD'99, che contiene log di rete con etichette per traffico normale e attacchi.
+Abbiamo utilizzato il **dataset NSL-KDD** disponibile su [Kaggle](https://www.kaggle.com/datasets/hassan06/nslkdd). Questo dataset è una versione migliorata del classico KDD'99, noto per la sua applicazione nel rilevamento di intrusioni di rete. Contiene una combinazione di traffico legittimo e tentativi di attacco.
 
-- **NSL-KDD Train Set**: [NSL_KDD_Train.csv](https://raw.githubusercontent.com/Mamcose/NSL-KDD-Network-Intrusion-Detection/refs/heads/master/NSL_KDD_Train.csv)
-- **NSL-KDD Test Set**: [NSL_KDD_Test.csv](https://raw.githubusercontent.com/Mamcose/NSL-KDD-Network-Intrusion-Detection/refs/heads/master/NSL_KDD_Test.csv)
+Per l'analisi abbiamo suddiviso i dati in due parti:
+- **NSL-KDD Train Set**: Utilizzato per calcolare le soglie di rischio e condurre le prime analisi.
+- **NSL-KDD Test Set**: Utilizzato per valutare il modello di rischio e testare l'efficacia delle soglie definite.
 
-## Grafici e Visualizzazioni
+Abbiamo scelto di usare i file **train** e **test** separatamente per simulare un'analisi che possa essere ripetibile su set di dati futuri, garantendo così che le soglie definite siano valide anche su nuovi dati.
 
-Nel progetto sono stati utilizzati diversi tipi di grafici per esplorare i dati e individuare anomalie:
+## Funzionalità Principali
 
-1. **Distribuzione delle Etichette**: Grafico a barre che mostra il numero di eventi normali rispetto agli attacchi.
-2. **Boxplot per `src_bytes`**: Visualizza la distribuzione dei byte inviati, individuando outlier.
-3. **Grafico a Linee del Traffico per Protocollo**: Mostra come varia il traffico in base al protocollo (`tcp`, `udp`, `icmp`).
-4. **Istogramma del Numero di Connessioni**: Evidenzia il numero di connessioni per ciascun intervallo di tempo.
-5. **Scatter Plot tra `src_bytes` e `dst_bytes`**: Visualizza la relazione tra byte inviati e ricevuti per ogni evento.
-6. **Grafico a Linee basato sul Timestamp**: Monitora l'andamento del traffico `src_bytes` e `dst_bytes` nel tempo.
-7. **Mappa di Calore basata sul Tempo**: Visualizza l'intensità del traffico per ore e giorni.
+- **Calcolo del Punteggio di Rischio**: Un sistema di valutazione del rischio basato su variabili come i byte inviati (`src_bytes`), i tentativi di login falliti e il protocollo di rete.
+- **Rilevamento delle Anomalie**: Identificazione di eventi anomali attraverso analisi statistiche basate sulla deviazione standard.
+- **Simulazione Temporale**: Aggiunta di una colonna `timestamp` per simulare il monitoraggio temporale del traffico e osservare i picchi sospetti.
+- **Dashboard Interattiva in Power BI**: Visualizzazione dei risultati in una dashboard interattiva per comprendere meglio i pattern di traffico e le anomalie.
 
-## Dashboard Power BI
+## Grafici Utilizzati
 
-La dashboard interattiva in **Power BI** consente di esplorare i dati visualizzati attraverso una serie di grafici. Le visualizzazioni principali includono:
+Diversi tipi di grafici sono stati utilizzati per esplorare e visualizzare i dati:
 
-- **Grafico a Linee del Traffico nel Tempo**: Mostra l'andamento del traffico `src_bytes` e `dst_bytes` nel tempo.
-- **Mappa di Calore**: Visualizza l'intensità del traffico in base alle ore e ai giorni.
-- **Grafico a Barre della Distribuzione delle Etichette**: Visualizza la distribuzione di traffico legittimo rispetto agli attacchi.
+1. **Distribuzione delle Etichette**: Un grafico a barre che mostra la proporzione di traffico normale e attacchi.
+2. **Boxplot per `src_bytes`**: Un grafico che evidenzia la distribuzione dei byte inviati e identifica outlier.
+3. **Grafico a Linee del Traffico per Protocollo**: Rappresenta l'andamento del traffico in base ai protocolli di rete (`tcp`, `udp`, `icmp`).
+4. **Grafico a Linee basato sul Timestamp**: Mostra l'andamento del traffico (byte inviati) nel tempo.
+5. **Mappa di Calore del Traffico**: Mostra l'intensità del traffico per ora e giorno.
 
-### Screenshots della Dashboard
-- *(Aggiungi qui uno screenshot della tua dashboard Power BI una volta completata.)*
+## Dashboard in Power BI
+
+Il progetto include una **dashboard interattiva in Power BI**, che consente di visualizzare le anomalie e i pattern di traffico di rete nel tempo. Questa dashboard facilita l'analisi dei dati e permette di filtrare eventi sospetti, migliorando così la capacità di risposta alle minacce.
+
+### Link alla Dashboard e al Progetto
+
+- **[PDF della Dashboard Power BI](https://github.com/username/project-name/PowerBI-Dashboard.pdf)** *(Sostituire con il link corretto)*
+- **[Link al Progetto su GitHub](https://github.com/username/project-name)** *(Sostituire con il link corretto)*
 
 ## Credits
 
 - **Michele**: Sviluppo del progetto e analisi dei dati.
-- **NSL-KDD Dataset**: Dati utilizzati per l'analisi del traffico di rete.
-
+- **NSL-KDD Dataset**: Dati utilizzati per l'analisi del traffico di rete. Dataset scaricabile da [Kaggle](https://www.kaggle.com/datasets/hassan06/nslkdd).
+  
 ## License
 
-Questo progetto è distribuito sotto la licenza **GNU General Public License v3.0**. Consulta il file [LICENSE](LICENSE) per i dettagli.
+Questo progetto è distribuito sotto la licenza **GNU General Public License v3.0**. Consulta il file [LICENSE](https://github.com/username/project-name/blob/main/LICENSE) per i dettagli.
