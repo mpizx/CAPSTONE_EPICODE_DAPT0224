@@ -52,8 +52,8 @@ Il progetto include una **dashboard interattiva in Power BI**, che consente di v
 
 ### Link alla dashboard e al progetto
 
-- **[PDF della Dashboard Power BI](https://github.com/username/project-name/PowerBI-Dashboard.pdf)** *(Sostituire con il link corretto)*
-- **[Link al Progetto su GitHub](https://github.com/username/project-name)** *(Sostituire con il link corretto)*
+- **[PDF della Dashboard Power BI](https://github.com/username/project-name/PowerBI-Dashboard.pdf)** 
+- **[Link al Progetto su GitHub](https://github.com/username/project-name)** 
 
 ## Credits
 
